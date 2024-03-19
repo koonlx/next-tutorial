@@ -26,8 +26,8 @@
     right: 0;
     width: 50%;
     height: calc(95%);
-    /* background-color: var(--bg); */
-    background-color: orange;
+    background-color: var(--bg);
+    /* background-color: orange; */
     display: flex;
     flex-direction: column;
     align-items: center;

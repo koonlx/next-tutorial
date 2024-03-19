@@ -1,7 +1,15 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import styles from './contact.module.css';
 import Image from 'next/image';
 function ContentPage() {
+  const [isClient, setIsClient] = useState(false);
+  const a = Math.random();
+  console.log(a);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -13,6 +21,7 @@ function ContentPage() {
         />
       </div>
       <div className={styles.formContainer}>
+        {isClient && a}
         <form className={styles.form}>
           <input type="text" placeholder="Name and Surname" />
           <input type="text" placeholder="Email Address" />
@@ -24,7 +33,7 @@ function ContentPage() {
             rows="10"
             placeholder="Message"
           ></textarea>
-          <button>Send</button>
+          <button onClick={() => console.log('clicked')}>Send</button>
         </form>
       </div>
     </div>

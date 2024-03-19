@@ -10,7 +10,7 @@ function SinglePostPage() {
       </div>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>Title</h1>
-        <div className="styles detail">
+        <div className={styles.detail}>
           <Image className={styles.avatar} src={'/noavatar.png'} alt="" fill />
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Author</span>
