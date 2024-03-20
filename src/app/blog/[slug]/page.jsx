@@ -1,30 +1,51 @@
 import React from 'react';
 import styles from './singlepost.module.css';
 import Image from 'next/image';
+import { getPost } from '@/lib/data';
+import PostUser from '@/components/postUser/PostUser';
 
-function SinglePostPage() {
+// const getData = async (slug) => {
+//   const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+//   if (!res.ok) {
+//     throw new Error('something went wrong');
+//   }
+//   return res.json();
+// };
+
+// export const generateMetadata = async ({ params }) => {
+//   const { slug } = params;
+//   const post = await getPost(slug);
+
+//   return {
+//     title: post.title,
+//     description: post.desc,
+//   };
+// };
+
+async function SinglePostPage({ params }) {
+  const { slug } = params;
+  console.log(slug);
+  const post = await getPost(slug);
+  console.log(post.userId);
   return (
     <div className={styles.container}>
-      <div className={styles.imgContainer}>
-        <Image src={'/post.png'} alt="" fill className={styles.img} />
-      </div>
+      {post.img && (
+        <div className={styles.imgContainer}>
+          <Image src={post.img} alt="" fill className={styles.img} />
+        </div>
+      )}
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Title</h1>
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.detail}>
-          <Image className={styles.avatar} src={'/noavatar.png'} alt="" fill />
+          {post && <PostUser userId={post.userId} />}
           <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Author</span>
-            <span className={styles.detailValue}>Date</span>
-          </div>
-          <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Author</span>
-            <span className={styles.detailValue}>Date</span>
+            <span className={styles.detailTitle}>Published</span>
+            <span className={styles.detailValue}>
+              {post.createdAt.toString().slice(4, 16)}
+            </span>
           </div>
         </div>
-        <div className={styles.content}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inure velit
-          quisquam natus blanditiis? Autem, dolore consectetur sunt quod tem
-        </div>
+        <div className={styles.content}>{post.desc}</div>
       </div>
     </div>
   );

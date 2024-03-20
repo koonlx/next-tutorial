@@ -1,21 +1,17 @@
 import React from 'react';
 import styles from './blog.module.css';
 import Postcard from '@/components/postcard/Postcard';
-function BlogPage() {
+import { getPosts } from '@/lib/data';
+async function BlogPage() {
+  const posts = await getPosts();
   return (
     <div className={styles.container}>
-      <div className={styles.post}>
-        <Postcard />
+      {posts.map((post)=>(
+      <div className={styles.post} key={post.id}>
+        <Postcard post={post} />
       </div>
-      <div className={styles.post}>
-        <Postcard />
-      </div>
-      <div className={styles.post}>
-        <Postcard />
-      </div>
-      <div className={styles.post}>
-        <Postcard />
-      </div>
+
+      ))}
     </div>
   );
 }
